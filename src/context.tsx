@@ -1,19 +1,38 @@
 import { createContext, useState } from "react";
 
-export const userContext = createContext({
+
+interface UserContextType {
+  name: string;
+  setName: (name: string) => void;
+  email: string;
+  setEmail: (email: string) => void;
+  phone: number;
+  setPhone: (phone: number) => void;
+  active: string;
+  setActive: (active: string) => void;
+  // localstorage items
+  storedEmail: string;
+  storedName: string;
+  storedPhone: string;
+}
+
+export const userContext = createContext<UserContextType>({
   name: "",
-  setName: (name: string) => {},
+  setName: () => { },
   email: "",
-  setEmail: (email: string) => {},
+  setEmail: () => { },
   phone: 0,
-  setPhone: (phone: number) => {},
+  setPhone: () => { },
   active: "",
-  setActive: (active: string) => {},
+  setActive: () => { },
   // localstorage items
   storedEmail: "",
   storedName: "",
   storedPhone: "",
 });
+
+
+
 interface ContextProviderProp {
   children?: React.ReactNode;
 }
@@ -23,10 +42,10 @@ export const UserProvider: React.FC<ContextProviderProp> = ({ children }) => {
   const [phone, setPhone] = useState<number>(Number);
   const [active, setActive] = useState<string>("");
   const {
-    name: storedName,
-    email: storedEmail,
-    phone: storedPhone,
-  } = JSON.parse(localStorage.getItem("loginItems")) || {};
+    name: storedName = "",
+    email: storedEmail = "",
+    phone: storedPhone = 0
+  } = JSON.parse(localStorage.getItem("loginItems") ?? "{}")
 
   return (
     <userContext.Provider
