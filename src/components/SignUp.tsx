@@ -97,7 +97,8 @@ const SignUp: React.FC = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onClick={handleSubmit}
+          >
             <TextField
               variant="outlined"
               margin="normal"
@@ -148,7 +149,6 @@ const SignUp: React.FC = () => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={handleSubmit}
             >
               Sign Up
             </Button>
